@@ -1,5 +1,5 @@
 my_data.py
 test.py
-/text-files/
-abc.txt
-test.py
+saved-playlists/*
+!saved-playlists/root.txt
+.vscode

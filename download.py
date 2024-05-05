@@ -2,6 +2,8 @@ from playwright.sync_api import sync_playwright
 from random import randint
 from time import sleep
 import my_data as mydata
+
+t=[]
 with sync_playwright() as p:
 	browser = p.chromium.launch(**{
 		'args': ["--disable-blink-features=AutomationControlled"],
@@ -11,22 +13,31 @@ with sync_playwright() as p:
 	context1=browser.new_context()
 	page1 = context1.new_page()
 	page1.goto('https://www.youtube.com')
-	sleep(randint(3,15))
+	sleep(randint(3,7))
 	page1.get_by_label("Sign in").click()
-	sleep(randint(3,15))
+	sleep(randint(3,7))
 	page1.get_by_role("textbox").fill(mydata.USERNAME)
-	sleep(randint(3,15))
+	sleep(randint(3,7))
 	page1.get_by_role("button",name="Next").click()
-	sleep(randint(3,15))
+	sleep(randint(3,7))
 	page1.get_by_role("textbox").fill(mydata.PASSWORD)
-	sleep(randint(3,15))
+	sleep(randint(3,7))
 	page1.get_by_role("button",name="Next").click()
-	
-	sleep(100)
+	sleep(randint(3,7))
+	page1.goto('https://www.youtube.com/feed/playlists')
+	sleep(randint(3,7))
+	all_as=page1.query_selector_all('.yt-lockup-metadata-view-model-wiz__title')
 
-	page2=context1.new_page()
-	page2.goto("https://www.youtube.com/watch?v=ckpotxktdvY")
-	sleep(1000)
+	for single_a in all_as:
+		text=single_a.query_selector('span').inner_text()
+		t.append(text)
+	
+	print(t)
+
+
+
+
+
 
 	# page1.wait_for_timeout(10000)
 	# i=input("Do you want to proceed?: ")
