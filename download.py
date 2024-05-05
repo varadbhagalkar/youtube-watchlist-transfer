@@ -17,6 +17,14 @@ with sync_playwright() as p:
 	page1.get_by_role("textbox").fill(mydata.USERNAME)
 	sleep(randint(7,15))
 	page1.get_by_role("button",name="Next").click()
+	sleep(randint(7,15))
+	page1.get_by_role("textbox").fill(mydata.PASSWORD)
+	sleep(randint(7,15))
+	page1.get_by_role("button",name="Next").click()
+	sleep(100)
+
+	page2=context1.new_page()
+	page2.goto("https://www.youtube.com/watch?v=ckpotxktdvY")
 	sleep(1000)
 
 	# page1.wait_for_timeout(10000)
